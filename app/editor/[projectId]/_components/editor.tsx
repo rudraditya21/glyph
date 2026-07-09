@@ -1,9 +1,12 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls, Panel } from "@xyflow/react"
+import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls, Panel, type Connection, NodeChange, Node, EdgeChange, Edge } from "@xyflow/react"
 import '@xyflow/react/dist/style.css'
 import ThemeToggle from "@/components/theme-toggle";
+
+type EditorNode = Node<{ label: string }>
+type EditorEdge = Edge<{ label: string }>
 
 const initialNodes = [
   { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
@@ -17,17 +20,17 @@ export default function Editor() {
   const [edges, setEdges] = useState(initialEdges)
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    (changes: NodeChange<EditorNode>[]) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
     [],
   );
 
   const onEdgesChange = useCallback(
-    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    (changes: EdgeChange<EditorEdge>[]) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     [],
   );
 
   const onConnect = useCallback(
-    (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     [],
   );
 
