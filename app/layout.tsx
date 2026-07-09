@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/header";
 import { Instrument_Sans } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
@@ -24,7 +23,6 @@ export default function RootLayout({
     <html lang="en" className={`${instrumentSans.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <TooltipProvider>
-          <Header />
           {children}
         </TooltipProvider>
       </body>
