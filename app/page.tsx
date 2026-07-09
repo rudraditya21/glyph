@@ -19,7 +19,7 @@ export default function Home() {
       <div className="min-h-[90svh]">
       </div>
       {/* Footer */}
-      <footer className="boder-t px-6 border-dashed">
+      <footer className="border-t px-6 border-dashed">
         <Link href="#">Github</Link>
       </footer>
     </div>
