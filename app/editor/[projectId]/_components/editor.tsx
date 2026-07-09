@@ -7,6 +7,7 @@ import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
 import Sidebar from "./sidebar/sidebar";
 import SidebarTrigger from "./sidebar/sidebar-trigger";
+import TopMenu from "./top-menu/top-menu";
 
 type EditorNode = Node<{ label: string }>
 type EditorEdge = Edge<{ label: string }>
@@ -62,6 +63,9 @@ export default function Editor() {
         onConnect={onConnect}
         fitView
       >
+        <Panel position="top-center">
+          <TopMenu />
+        </Panel>
         <Panel position="top-right">
           <Sheet>
             <SidebarTrigger />
