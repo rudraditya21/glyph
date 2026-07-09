@@ -34,6 +34,21 @@ export default function Editor() {
     [],
   );
 
+  const addNode = () => {
+    const newNode: EditorNode = {
+      id: `node-${nodes.length + 1}`,
+      position: {
+        x: Math.random() * 400,
+        y: Math.random() * 400,
+      },
+      data: {
+        label: `Node: ${nodes.length + 1}`,
+      },
+    }
+    setNodes((prev) => [...prev, newNode])
+    console.log("Added Node")
+  }
+
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
@@ -44,6 +59,11 @@ export default function Editor() {
         onConnect={onConnect}
         fitView
       >
+        <Panel position="top-right">
+          <button onClick={addNode}>
+            Add Node
+          </button>
+        </Panel>
         <Panel position="bottom-right">
           <ThemeToggle />
         </Panel>
