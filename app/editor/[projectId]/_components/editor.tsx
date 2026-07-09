@@ -1,16 +1,14 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls, Panel, type Connection, NodeChange, Node, EdgeChange, Edge } from "@xyflow/react"
+import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls, Panel, type Connection, NodeChange, EdgeChange } from "@xyflow/react"
 import '@xyflow/react/dist/style.css'
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
 import Sidebar from "./sidebar/sidebar";
 import SidebarTrigger from "./sidebar/sidebar-trigger";
 import TopMenu from "./top-menu/top-menu";
-
-type EditorNode = Node<{ label: string }>
-type EditorEdge = Edge<{ label: string }>
+import { EditorNode, EditorEdge } from "@/types/editor";
 
 const initialNodes = [
   { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
