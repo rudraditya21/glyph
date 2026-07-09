@@ -67,7 +67,7 @@ export default function Editor() {
         <Panel position="top-right">
           <Sheet>
             <SidebarTrigger />
-            <Sidebar />
+            <Sidebar addNode={addNode} />
           </Sheet>
         </Panel>
         {/* <Panel position="top-right">
