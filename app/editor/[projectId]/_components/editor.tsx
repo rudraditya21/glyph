@@ -4,6 +4,9 @@ import { useState, useCallback } from "react"
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls, Panel, type Connection, NodeChange, Node, EdgeChange, Edge } from "@xyflow/react"
 import '@xyflow/react/dist/style.css'
 import ThemeToggle from "@/components/theme-toggle";
+import { Sheet } from "@/components/ui/sheet";
+import Sidebar from "./sidebar/sidebar";
+import SidebarTrigger from "./sidebar/sidebar-trigger";
 
 type EditorNode = Node<{ label: string }>
 type EditorEdge = Edge<{ label: string }>
@@ -60,10 +63,16 @@ export default function Editor() {
         fitView
       >
         <Panel position="top-right">
+          <Sheet>
+            <SidebarTrigger />
+            <Sidebar />
+          </Sheet>
+        </Panel>
+        {/* <Panel position="top-right">
           <button onClick={addNode}>
             Add Node
           </button>
-        </Panel>
+        </Panel> */}
         <Panel position="bottom-right">
           <ThemeToggle />
         </Panel>

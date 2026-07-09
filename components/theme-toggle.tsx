@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { Sun, Moon } from '@phosphor-icons/react'
+import { Sun, Moon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 export default function ThemeToggle() {
@@ -93,7 +93,7 @@ export default function ThemeToggle() {
           </TooltipTrigger>
         </div>
 
-        <TooltipContent side="bottom">
+        <TooltipContent side="left">
           {dark ? 'Light mode' : 'Dark mode'}
         </TooltipContent>
       </Tooltip>
