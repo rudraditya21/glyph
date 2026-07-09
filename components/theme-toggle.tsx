@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { Sun, Moon } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false)
@@ -69,34 +68,24 @@ export default function ThemeToggle() {
   }
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <div
-          className="inline-flex rounded-full p-px"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 50%, var(--border) 50%)',
-          }}
-        >
-          <TooltipTrigger>
-            <button
-              onClick={toggle}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur-md"
-              aria-label="Toggle theme"
-            >
-              <div ref={sunRef} className="absolute">
-                <Sun size={18} />
-              </div>
-              <div ref={moonRef} className="absolute">
-                <Moon size={18} />
-              </div>
-            </button>
-          </TooltipTrigger>
+    <div
+      className="inline-flex rounded-full p-px"
+      style={{
+        background: 'linear-gradient(to bottom, transparent 50%, var(--border) 50%)',
+      }}
+    >
+      <button
+        onClick={toggle}
+        className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur-md"
+        aria-label="Toggle theme"
+      >
+        <div ref={sunRef} className="absolute">
+          <Sun size={18} />
         </div>
-
-        <TooltipContent side="left">
-          {dark ? 'Light mode' : 'Dark mode'}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+        <div ref={moonRef} className="absolute">
+          <Moon size={18} />
+        </div>
+      </button>
+    </div>
   )
 }
