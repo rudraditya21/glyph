@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/header";
 import { Instrument_Sans } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -20,10 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} h-full antialiased`} >
+    <html lang="en" className={`${instrumentSans.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
+        <TooltipProvider>
+          <Header />
+          {children}
+        </TooltipProvider>
       </body>
     </html>
   );
