@@ -5,6 +5,11 @@ import { applyNodeChanges, applyEdgeChanges, addEdge, type NodeChange, type Edge
 import { EditorNode, EditorEdge, } from "@/types/editor"
 import { nodeRegistry } from "@/components/editor/nodes/registry"
 
+interface EditorClipboard {
+  nodes: EditorNode[]
+  edges: EditorEdge[]
+}
+
 interface EditorSnapshot {
   nodes: EditorNode[]
   edges: EditorEdge[]
@@ -15,6 +20,8 @@ interface EditorState {
   edges: EditorEdge[]
 
   selectedNodeIds: string[]
+
+  clipboard: EditorClipboard | null
 
   history: EditorSnapshot[]
   future: EditorSnapshot[]
@@ -32,6 +39,8 @@ interface EditorState {
   redo(): void
 
   copySelected(): void
+  paste(): void
+
   deleteSelected(): void
 
   selectNodes(ids: string[]): void
@@ -53,6 +62,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   edges: [],
 
   selectedNodeIds: [],
+  clipboard: null,
 
   history: [],
   future: [],
@@ -137,16 +147,43 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     const state = get()
     const selectedNodes = state.nodes.filter(node => state.selectedNodeIds.includes(node.id))
     if (selectedNodes.length === 0) return
-    const copiedNodes = selectedNodes.map(node => ({
-      ...structuredClone(node),
-      id: crypto.randomUUID(),
-      position: {
-        x: node.position.x + 50,
-        y: node.position.y + 50
+    const selectedEdges = state.edges.filter(edge => state.selectedNodeIds.includes(edge.source) && state.selectedNodeIds.includes(edge.target))
+    set({
+      clipboard: {
+        nodes: structuredClone(selectedNodes),
+        edges: structuredClone(selectedEdges)
       }
+    })
+  },
+
+  paste: () => {
+    const state = get()
+    if (!state.clipboard) return
+    const nodeMap = new Map<string, string>()
+    const newNodes = state.clipboard.nodes.map(node => {
+      const newId = crypto.randomUUID()
+      nodeMap.set(node.id, newId)
+      return {
+        ...structuredClone(node),
+        id: newId,
+        position: {
+          x: node.position.x + 50,
+          y: node.position.y + 50,
+        }
+      }
+    })
+    const newEdges = state.clipboard.edges.map(edge => ({
+      ...structuredClone(edge),
+      id: crypto.randomUUID(),
+      source: nodeMap.get(edge.source)!,
+      target: nodeMap.get(edge.target)!,
     }))
     set({
-      nodes: [...state.nodes, ...copiedNodes]
+      history: pushHistory(state.history, createSnapshot(state.nodes, state.edges)),
+      future: [],
+      nodes: [...state.nodes, ...newNodes],
+      edges: [...state.edges, ...newEdges],
+      selectedNodeIds: newNodes.map(node => node.id)
     })
   },
 

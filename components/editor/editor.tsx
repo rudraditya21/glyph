@@ -10,12 +10,15 @@ import TopMenu from "./top-menu/top-menu";
 import { nodeRegistry } from "./nodes/registry";
 
 import { useEditorStore } from "@/store/editor-store";
+import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 
 const nodeTypes = Object.fromEntries(
   nodeRegistry.map((node) => [node.type, node.component])
 )
 
 export default function Editor() {
+  useEditorShortcuts()
+
   const nodes = useEditorStore(state => state.nodes)
   const edges = useEditorStore(state => state.edges)
 
@@ -35,6 +38,7 @@ export default function Editor() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        deleteKeyCode={null}
         nodeTypes={nodeTypes}
         onSelectionChange={(elements) => {
           const ids = elements.nodes.map(n => n.id)
