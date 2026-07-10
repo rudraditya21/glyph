@@ -16,7 +16,7 @@ export default function Sidebar({ addNode }: SidebarProps) {
           <SheetTitle>Catalog</SheetTitle>
           <SheetDescription>Drag or click a node to add it to your workflow</SheetDescription>
         </SheetHeader>
-        <div className="mt-6 grid grid-cols-4 gap-3 px-4">
+        <div className="mt-6 grid grid-cols-4 gap-3 px-4 overflow-y-auto">
           {nodeRegistry.map((node) => (
             <Tooltip key={node.type}>
               <TooltipTrigger>
