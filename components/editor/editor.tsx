@@ -48,6 +48,12 @@ export default function Editor() {
           useEditorStore.getState().saveHistory()
         }}
         fitView
+        fitViewOptions={{
+          padding: 0.5,
+          maxZoom: 0.85
+        }}
+        minZoom={0.2}
+        maxZoom={1.5}
       >
         <Panel position="top-center">
           <TopMenu />
