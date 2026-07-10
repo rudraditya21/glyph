@@ -13,7 +13,7 @@ export default function SidebarTrigger() {
         </SheetTrigger>
       </TooltipTrigger>
       <TooltipContent side="left">
-        <p>Menu</p>
+        <p>Catalog</p>
       </TooltipContent>
     </Tooltip>
   )
