@@ -1,11 +1,5 @@
 import { SheetContent } from "@/components/ui/sheet"
-
-const nodeTypes = [
-  {
-    type: "text",
-    label: "Text Node",
-  },
-];
+import { nodeRegistry } from "../nodes/registry";
 
 interface SidebarProps {
   addNode: (type: string) => void;
@@ -14,7 +8,7 @@ interface SidebarProps {
 export default function Sidebar({ addNode }: SidebarProps) {
   return (
     <SheetContent>
-      {nodeTypes.map((node) => (
+      {nodeRegistry.map((node) => (
         <button
           key={node.type}
           onClick={() => addNode(node.type)}

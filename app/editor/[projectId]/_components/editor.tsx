@@ -9,6 +9,11 @@ import Sidebar from "./sidebar/sidebar";
 import SidebarTrigger from "./sidebar/sidebar-trigger";
 import TopMenu from "./top-menu/top-menu";
 import { EditorNode, EditorEdge } from "@/types/editor";
+import { nodeRegistry } from "./nodes/registry";
+
+const nodeTypes = Object.fromEntries(
+  nodeRegistry.map((node) => [node.type, node.component])
+)
 
 const initialNodes = [
   { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
@@ -36,19 +41,24 @@ export default function Editor() {
     [],
   );
 
-  const addNode = () => {
-    const newNode: EditorNode = {
-      id: `node-${nodes.length + 1}`,
-      position: {
-        x: Math.random() * 400,
-        y: Math.random() * 400,
-      },
-      data: {
-        label: `Node: ${nodes.length + 1}`,
-      },
-    }
-    setNodes((prev) => [...prev, newNode])
-    console.log("Added Node")
+  const addNode = (type: string) => {
+    const definition = nodeRegistry.find((node) => node.type === type)
+    if (!definition) return;
+    setNodes((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        type: definition.type,
+        position: {
+          x: Math.random() * 500,
+          y: Math.random() * 500,
+        },
+        data: {
+          label: definition.label,
+          icon: definition.icon
+        }
+      }
+    ])
   }
 
   return (
@@ -59,6 +69,7 @@ export default function Editor() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
         fitView
       >
         <Panel position="top-center">
@@ -70,11 +81,6 @@ export default function Editor() {
             <Sidebar addNode={addNode} />
           </Sheet>
         </Panel>
-        {/* <Panel position="top-right">
-          <button onClick={addNode}>
-            Add Node
-          </button>
-        </Panel> */}
         <Panel position="bottom-right">
           <ThemeToggle />
         </Panel>
