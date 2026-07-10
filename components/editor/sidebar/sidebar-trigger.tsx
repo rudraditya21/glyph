@@ -1,10 +1,11 @@
+import { Menu } from "lucide-react";
+
 import { SheetTrigger } from "@/components/ui/sheet";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Menu } from "lucide-react";
 
 export default function SidebarTrigger() {
   return (

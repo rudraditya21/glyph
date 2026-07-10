@@ -1,6 +1,7 @@
-import ThemeToggle from "@/components/theme-toggle";
 import { Lobster } from "next/font/google";
 import Link from "next/link";
+
+import ThemeToggle from "@/components/theme-toggle";
 
 const lobster = Lobster({
   weight: ["400"],

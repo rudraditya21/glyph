@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { useEditorStore } from "@/store/editor-store";
 
 export function useEditorShortcuts() {

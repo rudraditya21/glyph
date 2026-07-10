@@ -1,4 +1,4 @@
-import { Node, Edge, NodeProps } from "@xyflow/react";
+import { Edge, Node, NodeProps } from "@xyflow/react";
 import type { ComponentType } from "react";
 
 export type EditorNode = Node<{ label: string; icon?: string }>;

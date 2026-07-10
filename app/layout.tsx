@@ -1,7 +1,9 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
 import { TooltipProvider } from "@/components/ui/tooltip";
-import "./globals.css";
 
 const poppins = Poppins({
   variable: "--font-instrument-poppins",

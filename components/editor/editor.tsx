@@ -1,16 +1,18 @@
 "use client";
 
-import { ReactFlow, Background, Controls, Panel } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+
+import { Background, Controls, Panel,ReactFlow } from "@xyflow/react";
+
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
+import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
+import { useEditorStore } from "@/store/editor-store";
+
+import { nodeRegistry } from "./nodes/registry";
 import Sidebar from "./sidebar/sidebar";
 import SidebarTrigger from "./sidebar/sidebar-trigger";
 import TopMenu from "./top-menu/top-menu";
-import { nodeRegistry } from "./nodes/registry";
-
-import { useEditorStore } from "@/store/editor-store";
-import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 
 const nodeTypes = Object.fromEntries(
   nodeRegistry.map((node) => [node.type, node.component]),

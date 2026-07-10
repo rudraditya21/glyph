@@ -1,10 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { XIcon } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
+
 import { Button } from "./button";
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
@@ -128,11 +129,11 @@ function SheetDescription({
 
 export {
   Sheet,
-  SheetTrigger,
   SheetClose,
   SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
   SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 };

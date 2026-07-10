@@ -1,7 +1,9 @@
-import { Redo, Undo, Copy, Trash, Clipboard } from "lucide-react";
-import MenuItem from "./menu-item";
+import { Clipboard,Copy, Redo, Trash, Undo } from "lucide-react";
+
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/editor-store";
+
+import MenuItem from "./menu-item";
 
 export default function TopMenu() {
   const undo = useEditorStore((s) => s.undo);

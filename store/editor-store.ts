@@ -1,16 +1,17 @@
 "use client";
 
-import { create } from "zustand";
 import {
-  applyNodeChanges,
-  applyEdgeChanges,
   addEdge,
-  type NodeChange,
-  type EdgeChange,
+  applyEdgeChanges,
+  applyNodeChanges,
   type Connection,
+  type EdgeChange,
+  type NodeChange,
 } from "@xyflow/react";
-import { EditorNode, EditorEdge } from "@/types/editor";
+import { create } from "zustand";
+
 import { nodeRegistry } from "@/components/editor/nodes/registry";
+import { EditorEdge,EditorNode } from "@/types/editor";
 
 interface EditorClipboard {
   nodes: EditorNode[];

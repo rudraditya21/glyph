@@ -1,5 +1,5 @@
+import { Handle, NodeProps,Position } from "@xyflow/react";
 import Image from "next/image";
-import { Handle, Position, NodeProps } from "@xyflow/react";
 
 export default function CatalogNode({ data }: NodeProps) {
   return (

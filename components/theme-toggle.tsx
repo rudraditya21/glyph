@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Sun, Moon } from "lucide-react";
+import { Moon,Sun } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);

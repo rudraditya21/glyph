@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED.
 // DO NOT EDIT MANUALLY.
 
-import CatalogNode from "../components/catalog-node";
-
 import { EditorNodeDefinition } from "@/types/editor";
+
+import CatalogNode from "../components/catalog-node";
 
 export const nodeRegistry: EditorNodeDefinition[] = [
   {
