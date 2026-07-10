@@ -25,6 +25,8 @@ export default function Editor() {
 
   const addNode = useEditorStore(state => state.addNode)
 
+  const selectNodes = useEditorStore(s => s.selectNodes)
+
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
@@ -34,6 +36,13 @@ export default function Editor() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        onSelectionChange={(elements) => {
+          const ids = elements.nodes.map(n => n.id)
+          selectNodes(ids)
+        }}
+        onNodeDragStart={() => {
+          useEditorStore.getState().saveHistory()
+        }}
         fitView
       >
         <Panel position="top-center">
