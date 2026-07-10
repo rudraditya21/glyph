@@ -3,7 +3,7 @@ import { Handle, Position, NodeProps } from "@xyflow/react";
 
 export default function CatalogNode({ data }: NodeProps) {
   return (
-    <div className="rounded-xl border bg-white shadow p-4 w-48">
+    <div className="w-28 h-28 rounded-xl border bg-white shadow flex flex-col items-center justify-center">
       <Image
         src={data.icon as string}
         alt={data.label as string}
@@ -13,8 +13,8 @@ export default function CatalogNode({ data }: NodeProps) {
         {data.label as string}
       </h3>
 
-      <Handle type="target" position={Position.Left} />
-      <Handle type="source" position={Position.Right} />
+      <Handle id="input" type="target" position={Position.Left} />
+      <Handle id="output" type="source" position={Position.Right} />
     </div>
   )
 }
