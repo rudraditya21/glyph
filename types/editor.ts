@@ -7,6 +7,7 @@ export type EditorEdge = Edge<{ label?: string }>
 export interface EditorNodeDefinition {
   type: string;
   label: string;
+  name: string;
   category: string;
   icon?: string;
   component: ComponentType<NodeProps>;
