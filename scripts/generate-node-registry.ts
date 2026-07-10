@@ -42,7 +42,7 @@ function generateNodes() {
     }
   }
 
-  return nodes;
+  return nodes.sort((a, b) => a.type.localeCompare(b.type));
 }
 
 function writeRegistry() {

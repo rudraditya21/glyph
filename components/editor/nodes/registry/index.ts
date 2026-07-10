@@ -8,13 +8,6 @@ import { EditorNodeDefinition } from "@/types/editor";
 
 export const nodeRegistry: EditorNodeDefinition[] = [
   {
-    "type": "aws.apigateway",
-    "label": "aws-apigateway",
-    "name": "API-Gateway",
-    "category": "AWS",
-    "icon": "/icons/aws/API-Gateway.svg"
-  },
-  {
     "type": "aws.activate",
     "label": "aws-activate",
     "name": "Activate",
@@ -43,18 +36,11 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Apache-MXNet-on-AWS.svg"
   },
   {
-    "type": "aws.appmesh",
-    "label": "aws-appmesh",
-    "name": "App-Mesh",
+    "type": "aws.apigateway",
+    "label": "aws-apigateway",
+    "name": "API-Gateway",
     "category": "AWS",
-    "icon": "/icons/aws/App-Mesh.svg"
-  },
-  {
-    "type": "aws.apprunner",
-    "label": "aws-apprunner",
-    "name": "App-Runner",
-    "category": "AWS",
-    "icon": "/icons/aws/App-Runner.svg"
+    "icon": "/icons/aws/API-Gateway.svg"
   },
   {
     "type": "aws.appconfig",
@@ -69,20 +55,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "AppFlow",
     "category": "AWS",
     "icon": "/icons/aws/AppFlow.svg"
-  },
-  {
-    "type": "aws.appstream",
-    "label": "aws-appstream",
-    "name": "AppStream",
-    "category": "AWS",
-    "icon": "/icons/aws/AppStream.svg"
-  },
-  {
-    "type": "aws.appsync",
-    "label": "aws-appsync",
-    "name": "AppSync",
-    "category": "AWS",
-    "icon": "/icons/aws/AppSync.svg"
   },
   {
     "type": "aws.applicationautoscaling",
@@ -118,6 +90,34 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Application-Migration-Service",
     "category": "AWS",
     "icon": "/icons/aws/Application-Migration-Service.svg"
+  },
+  {
+    "type": "aws.appmesh",
+    "label": "aws-appmesh",
+    "name": "App-Mesh",
+    "category": "AWS",
+    "icon": "/icons/aws/App-Mesh.svg"
+  },
+  {
+    "type": "aws.apprunner",
+    "label": "aws-apprunner",
+    "name": "App-Runner",
+    "category": "AWS",
+    "icon": "/icons/aws/App-Runner.svg"
+  },
+  {
+    "type": "aws.appstream",
+    "label": "aws-appstream",
+    "name": "AppStream",
+    "category": "AWS",
+    "icon": "/icons/aws/AppStream.svg"
+  },
+  {
+    "type": "aws.appsync",
+    "label": "aws-appsync",
+    "name": "AppSync",
+    "category": "AWS",
+    "icon": "/icons/aws/AppSync.svg"
   },
   {
     "type": "aws.artifact",
@@ -225,6 +225,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Chatbot.svg"
   },
   {
+    "type": "aws.chime",
+    "label": "aws-chime",
+    "name": "Chime",
+    "category": "AWS",
+    "icon": "/icons/aws/Chime.svg"
+  },
+  {
     "type": "aws.chimesdk",
     "label": "aws-chimesdk",
     "name": "Chime-SDK",
@@ -239,13 +246,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Chime-Voice-Connector.svg"
   },
   {
-    "type": "aws.chime",
-    "label": "aws-chime",
-    "name": "Chime",
-    "category": "AWS",
-    "icon": "/icons/aws/Chime.svg"
-  },
-  {
     "type": "aws.cleanrooms",
     "label": "aws-cleanrooms",
     "name": "Clean-Rooms",
@@ -258,6 +258,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Client-VPN",
     "category": "AWS",
     "icon": "/icons/aws/Client-VPN.svg"
+  },
+  {
+    "type": "aws.cloud9",
+    "label": "aws-cloud9",
+    "name": "Cloud9",
+    "category": "AWS",
+    "icon": "/icons/aws/Cloud9.svg"
   },
   {
     "type": "aws.cloudcontrolapi",
@@ -281,27 +288,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Cloud-Directory.svg"
   },
   {
-    "type": "aws.cloudmap",
-    "label": "aws-cloudmap",
-    "name": "Cloud-Map",
-    "category": "AWS",
-    "icon": "/icons/aws/Cloud-Map.svg"
-  },
-  {
-    "type": "aws.cloudwan",
-    "label": "aws-cloudwan",
-    "name": "Cloud-WAN",
-    "category": "AWS",
-    "icon": "/icons/aws/Cloud-WAN.svg"
-  },
-  {
-    "type": "aws.cloud9",
-    "label": "aws-cloud9",
-    "name": "Cloud9",
-    "category": "AWS",
-    "icon": "/icons/aws/Cloud9.svg"
-  },
-  {
     "type": "aws.cloudformation",
     "label": "aws-cloudformation",
     "name": "CloudFormation",
@@ -323,6 +309,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/CloudHSM.svg"
   },
   {
+    "type": "aws.cloudmap",
+    "label": "aws-cloudmap",
+    "name": "Cloud-Map",
+    "category": "AWS",
+    "icon": "/icons/aws/Cloud-Map.svg"
+  },
+  {
     "type": "aws.cloudsearch",
     "label": "aws-cloudsearch",
     "name": "CloudSearch",
@@ -342,6 +335,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "CloudTrail",
     "category": "AWS",
     "icon": "/icons/aws/CloudTrail.svg"
+  },
+  {
+    "type": "aws.cloudwan",
+    "label": "aws-cloudwan",
+    "name": "Cloud-WAN",
+    "category": "AWS",
+    "icon": "/icons/aws/Cloud-WAN.svg"
   },
   {
     "type": "aws.cloudwatch",
@@ -428,18 +428,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Command-Line-Interface.svg"
   },
   {
-    "type": "aws.comprehendmedical",
-    "label": "aws-comprehendmedical",
-    "name": "Comprehend-Medical",
-    "category": "AWS",
-    "icon": "/icons/aws/Comprehend-Medical.svg"
-  },
-  {
     "type": "aws.comprehend",
     "label": "aws-comprehend",
     "name": "Comprehend",
     "category": "AWS",
     "icon": "/icons/aws/Comprehend.svg"
+  },
+  {
+    "type": "aws.comprehendmedical",
+    "label": "aws-comprehendmedical",
+    "name": "Comprehend-Medical",
+    "category": "AWS",
+    "icon": "/icons/aws/Comprehend-Medical.svg"
   },
   {
     "type": "aws.computeoptimizer",
@@ -484,6 +484,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Corretto.svg"
   },
   {
+    "type": "aws.costandusagereport",
+    "label": "aws-costandusagereport",
+    "name": "Cost-and-Usage-Report",
+    "category": "AWS",
+    "icon": "/icons/aws/Cost-and-Usage-Report.svg"
+  },
+  {
     "type": "aws.costexplorer",
     "label": "aws-costexplorer",
     "name": "Cost-Explorer",
@@ -491,11 +498,11 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Cost-Explorer.svg"
   },
   {
-    "type": "aws.costandusagereport",
-    "label": "aws-costandusagereport",
-    "name": "Cost-and-Usage-Report",
+    "type": "aws.databasemigrationservice",
+    "label": "aws-databasemigrationservice",
+    "name": "Database-Migration-Service",
     "category": "AWS",
-    "icon": "/icons/aws/Cost-and-Usage-Report.svg"
+    "icon": "/icons/aws/Database-Migration-Service.svg"
   },
   {
     "type": "aws.dataexchange",
@@ -526,11 +533,11 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/DataZone.svg"
   },
   {
-    "type": "aws.databasemigrationservice",
-    "label": "aws-databasemigrationservice",
-    "name": "Database-Migration-Service",
+    "type": "aws.deepcomposer",
+    "label": "aws-deepcomposer",
+    "name": "DeepComposer",
     "category": "AWS",
-    "icon": "/icons/aws/Database-Migration-Service.svg"
+    "icon": "/icons/aws/DeepComposer.svg"
   },
   {
     "type": "aws.deeplearningamis",
@@ -545,13 +552,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Deep-Learning-Containers",
     "category": "AWS",
     "icon": "/icons/aws/Deep-Learning-Containers.svg"
-  },
-  {
-    "type": "aws.deepcomposer",
-    "label": "aws-deepcomposer",
-    "name": "DeepComposer",
-    "category": "AWS",
-    "icon": "/icons/aws/DeepComposer.svg"
   },
   {
     "type": "aws.deeplens",
@@ -575,18 +575,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Detective.svg"
   },
   {
-    "type": "aws.devopsguru",
-    "label": "aws-devopsguru",
-    "name": "DevOps-Guru",
-    "category": "AWS",
-    "icon": "/icons/aws/DevOps-Guru.svg"
-  },
-  {
     "type": "aws.devicefarm",
     "label": "aws-devicefarm",
     "name": "Device-Farm",
     "category": "AWS",
     "icon": "/icons/aws/Device-Farm.svg"
+  },
+  {
+    "type": "aws.devopsguru",
+    "label": "aws-devopsguru",
+    "name": "DevOps-Guru",
+    "category": "AWS",
+    "icon": "/icons/aws/DevOps-Guru.svg"
   },
   {
     "type": "aws.directconnect",
@@ -624,6 +624,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/DynamoDB.svg"
   },
   {
+    "type": "aws.ec2",
+    "label": "aws-ec2",
+    "name": "EC2",
+    "category": "AWS",
+    "icon": "/icons/aws/EC2.svg"
+  },
+  {
     "type": "aws.ec2autoscaling",
     "label": "aws-ec2autoscaling",
     "name": "EC2-Auto-Scaling",
@@ -636,13 +643,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "EC2-Image-Builder",
     "category": "AWS",
     "icon": "/icons/aws/EC2-Image-Builder.svg"
-  },
-  {
-    "type": "aws.ec2",
-    "label": "aws-ec2",
-    "name": "EC2",
-    "category": "AWS",
-    "icon": "/icons/aws/EC2.svg"
   },
   {
     "type": "aws.ecsanywhere",
@@ -678,13 +678,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "EKS-Distro",
     "category": "AWS",
     "icon": "/icons/aws/EKS-Distro.svg"
-  },
-  {
-    "type": "aws.emr",
-    "label": "aws-emr",
-    "name": "EMR",
-    "category": "AWS",
-    "icon": "/icons/aws/EMR.svg"
   },
   {
     "type": "aws.elasticache",
@@ -848,6 +841,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Elemental-Server.svg"
   },
   {
+    "type": "aws.emr",
+    "label": "aws-emr",
+    "name": "EMR",
+    "category": "AWS",
+    "icon": "/icons/aws/EMR.svg"
+  },
+  {
     "type": "aws.eventbridge",
     "label": "aws-eventbridge",
     "name": "EventBridge",
@@ -860,41 +860,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Express-Workflows",
     "category": "AWS",
     "icon": "/icons/aws/Express-Workflows.svg"
-  },
-  {
-    "type": "aws.fsxforlustre",
-    "label": "aws-fsxforlustre",
-    "name": "FSx-for-Lustre",
-    "category": "AWS",
-    "icon": "/icons/aws/FSx-for-Lustre.svg"
-  },
-  {
-    "type": "aws.fsxfornetappontap",
-    "label": "aws-fsxfornetappontap",
-    "name": "FSx-for-NetApp-ONTAP",
-    "category": "AWS",
-    "icon": "/icons/aws/FSx-for-NetApp-ONTAP.svg"
-  },
-  {
-    "type": "aws.fsxforopenzfs",
-    "label": "aws-fsxforopenzfs",
-    "name": "FSx-for-OpenZFS",
-    "category": "AWS",
-    "icon": "/icons/aws/FSx-for-OpenZFS.svg"
-  },
-  {
-    "type": "aws.fsxforwfs",
-    "label": "aws-fsxforwfs",
-    "name": "FSx-for-WFS",
-    "category": "AWS",
-    "icon": "/icons/aws/FSx-for-WFS.svg"
-  },
-  {
-    "type": "aws.fsx",
-    "label": "aws-fsx",
-    "name": "FSx",
-    "category": "AWS",
-    "icon": "/icons/aws/FSx.svg"
   },
   {
     "type": "aws.fargate",
@@ -953,6 +918,41 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/FreeRTOS.svg"
   },
   {
+    "type": "aws.fsx",
+    "label": "aws-fsx",
+    "name": "FSx",
+    "category": "AWS",
+    "icon": "/icons/aws/FSx.svg"
+  },
+  {
+    "type": "aws.fsxforlustre",
+    "label": "aws-fsxforlustre",
+    "name": "FSx-for-Lustre",
+    "category": "AWS",
+    "icon": "/icons/aws/FSx-for-Lustre.svg"
+  },
+  {
+    "type": "aws.fsxfornetappontap",
+    "label": "aws-fsxfornetappontap",
+    "name": "FSx-for-NetApp-ONTAP",
+    "category": "AWS",
+    "icon": "/icons/aws/FSx-for-NetApp-ONTAP.svg"
+  },
+  {
+    "type": "aws.fsxforopenzfs",
+    "label": "aws-fsxforopenzfs",
+    "name": "FSx-for-OpenZFS",
+    "category": "AWS",
+    "icon": "/icons/aws/FSx-for-OpenZFS.svg"
+  },
+  {
+    "type": "aws.fsxforwfs",
+    "label": "aws-fsxforwfs",
+    "name": "FSx-for-WFS",
+    "category": "AWS",
+    "icon": "/icons/aws/FSx-for-WFS.svg"
+  },
+  {
     "type": "aws.gamekit",
     "label": "aws-gamekit",
     "name": "GameKit",
@@ -988,6 +988,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Global-Accelerator.svg"
   },
   {
+    "type": "aws.glue",
+    "label": "aws-glue",
+    "name": "Glue",
+    "category": "AWS",
+    "icon": "/icons/aws/Glue.svg"
+  },
+  {
     "type": "aws.gluedatabrew",
     "label": "aws-gluedatabrew",
     "name": "Glue-DataBrew",
@@ -1000,13 +1007,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Glue-Elastic-Views",
     "category": "AWS",
     "icon": "/icons/aws/Glue-Elastic-Views.svg"
-  },
-  {
-    "type": "aws.glue",
-    "label": "aws-glue",
-    "name": "Glue",
-    "category": "AWS",
-    "icon": "/icons/aws/Glue.svg"
   },
   {
     "type": "aws.groundstation",
@@ -1042,13 +1042,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "IAM-Identity-Center",
     "category": "AWS",
     "icon": "/icons/aws/IAM-Identity-Center.svg"
-  },
-  {
-    "type": "aws.iq",
-    "label": "aws-iq",
-    "name": "IQ",
-    "category": "AWS",
-    "icon": "/icons/aws/IQ.svg"
   },
   {
     "type": "aws.identityandaccessmanagement",
@@ -1177,6 +1170,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/IoT-TwinMaker.svg"
   },
   {
+    "type": "aws.iq",
+    "label": "aws-iq",
+    "name": "IQ",
+    "category": "AWS",
+    "icon": "/icons/aws/IQ.svg"
+  },
+  {
     "type": "aws.kendra",
     "label": "aws-kendra",
     "name": "Kendra",
@@ -1196,6 +1196,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Keyspaces",
     "category": "AWS",
     "icon": "/icons/aws/Keyspaces.svg"
+  },
+  {
+    "type": "aws.kinesis",
+    "label": "aws-kinesis",
+    "name": "Kinesis",
+    "category": "AWS",
+    "icon": "/icons/aws/Kinesis.svg"
   },
   {
     "type": "aws.kinesisdataanalytics",
@@ -1224,13 +1231,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Kinesis-Video-Streams",
     "category": "AWS",
     "icon": "/icons/aws/Kinesis-Video-Streams.svg"
-  },
-  {
-    "type": "aws.kinesis",
-    "label": "aws-kinesis",
-    "name": "Kinesis",
-    "category": "AWS",
-    "icon": "/icons/aws/Kinesis.svg"
   },
   {
     "type": "aws.lakeformation",
@@ -1315,13 +1315,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Lumberyard",
     "category": "AWS",
     "icon": "/icons/aws/Lumberyard.svg"
-  },
-  {
-    "type": "aws.mq",
-    "label": "aws-mq",
-    "name": "MQ",
-    "category": "AWS",
-    "icon": "/icons/aws/MQ.svg"
   },
   {
     "type": "aws.macie",
@@ -1429,18 +1422,11 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Monitron.svg"
   },
   {
-    "type": "aws.nicedcv",
-    "label": "aws-nicedcv",
-    "name": "NICE-DCV",
+    "type": "aws.mq",
+    "label": "aws-mq",
+    "name": "MQ",
     "category": "AWS",
-    "icon": "/icons/aws/NICE-DCV.svg"
-  },
-  {
-    "type": "aws.niceenginframe",
-    "label": "aws-niceenginframe",
-    "name": "NICE-EnginFrame",
-    "category": "AWS",
-    "icon": "/icons/aws/NICE-EnginFrame.svg"
+    "icon": "/icons/aws/MQ.svg"
   },
   {
     "type": "aws.neptune",
@@ -1462,6 +1448,20 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Neuron",
     "category": "AWS",
     "icon": "/icons/aws/Neuron.svg"
+  },
+  {
+    "type": "aws.nicedcv",
+    "label": "aws-nicedcv",
+    "name": "NICE-DCV",
+    "category": "AWS",
+    "icon": "/icons/aws/NICE-DCV.svg"
+  },
+  {
+    "type": "aws.niceenginframe",
+    "label": "aws-niceenginframe",
+    "name": "NICE-EnginFrame",
+    "category": "AWS",
+    "icon": "/icons/aws/NICE-EnginFrame.svg"
   },
   {
     "type": "aws.nimblestudio",
@@ -1562,18 +1562,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Personalize.svg"
   },
   {
-    "type": "aws.pinpointapis",
-    "label": "aws-pinpointapis",
-    "name": "Pinpoint-APIs",
-    "category": "AWS",
-    "icon": "/icons/aws/Pinpoint-APIs.svg"
-  },
-  {
     "type": "aws.pinpoint",
     "label": "aws-pinpoint",
     "name": "Pinpoint",
     "category": "AWS",
     "icon": "/icons/aws/Pinpoint.svg"
+  },
+  {
+    "type": "aws.pinpointapis",
+    "label": "aws-pinpointapis",
+    "name": "Pinpoint-APIs",
+    "category": "AWS",
+    "icon": "/icons/aws/Pinpoint-APIs.svg"
   },
   {
     "type": "aws.polly",
@@ -1632,18 +1632,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/QuickSight.svg"
   },
   {
-    "type": "aws.rdsonvmware",
-    "label": "aws-rdsonvmware",
-    "name": "RDS-on-VMware",
-    "category": "AWS",
-    "icon": "/icons/aws/RDS-on-VMware.svg"
-  },
-  {
     "type": "aws.rds",
     "label": "aws-rds",
     "name": "RDS",
     "category": "AWS",
     "icon": "/icons/aws/RDS.svg"
+  },
+  {
+    "type": "aws.rdsonvmware",
+    "label": "aws-rdsonvmware",
+    "name": "RDS-on-VMware",
+    "category": "AWS",
+    "icon": "/icons/aws/RDS-on-VMware.svg"
   },
   {
     "type": "aws.redhatopenshiftserviceonaws",
@@ -1665,6 +1665,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Rekognition",
     "category": "AWS",
     "icon": "/icons/aws/Rekognition.svg"
+  },
+  {
+    "type": "aws.repost",
+    "label": "aws-repost",
+    "name": "rePost",
+    "category": "AWS",
+    "icon": "/icons/aws/rePost.svg"
   },
   {
     "type": "aws.reservedinstancereporting",
@@ -1716,6 +1723,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/S3-on-Outposts.svg"
   },
   {
+    "type": "aws.sagemaker",
+    "label": "aws-sagemaker",
+    "name": "SageMaker",
+    "category": "AWS",
+    "icon": "/icons/aws/SageMaker.svg"
+  },
+  {
     "type": "aws.sagemakergroundtruth",
     "label": "aws-sagemakergroundtruth",
     "name": "SageMaker-Ground-Truth",
@@ -1728,13 +1742,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "SageMaker-Studio-Lab",
     "category": "AWS",
     "icon": "/icons/aws/SageMaker-Studio-Lab.svg"
-  },
-  {
-    "type": "aws.sagemaker",
-    "label": "aws-sagemaker",
-    "name": "SageMaker",
-    "category": "AWS",
-    "icon": "/icons/aws/SageMaker.svg"
   },
   {
     "type": "aws.savingsplans",
@@ -1765,18 +1772,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Security-Lake.svg"
   },
   {
-    "type": "aws.servermigrationservice",
-    "label": "aws-servermigrationservice",
-    "name": "Server-Migration-Service",
-    "category": "AWS",
-    "icon": "/icons/aws/Server-Migration-Service.svg"
-  },
-  {
     "type": "aws.serverlessapplicationrepository",
     "label": "aws-serverlessapplicationrepository",
     "name": "Serverless-Application-Repository",
     "category": "AWS",
     "icon": "/icons/aws/Serverless-Application-Repository.svg"
+  },
+  {
+    "type": "aws.servermigrationservice",
+    "label": "aws-servermigrationservice",
+    "name": "Server-Migration-Service",
+    "category": "AWS",
+    "icon": "/icons/aws/Server-Migration-Service.svg"
   },
   {
     "type": "aws.servicecatalog",
@@ -1807,13 +1814,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Signer.svg"
   },
   {
-    "type": "aws.simspaceweaver",
-    "label": "aws-simspaceweaver",
-    "name": "SimSpace-Weaver",
-    "category": "AWS",
-    "icon": "/icons/aws/SimSpace-Weaver.svg"
-  },
-  {
     "type": "aws.simpleemailservice",
     "label": "aws-simpleemailservice",
     "name": "Simple-Email-Service",
@@ -1835,6 +1835,13 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Simple-Queue-Service.svg"
   },
   {
+    "type": "aws.simplestorageservice",
+    "label": "aws-simplestorageservice",
+    "name": "Simple-Storage-Service",
+    "category": "AWS",
+    "icon": "/icons/aws/Simple-Storage-Service.svg"
+  },
+  {
     "type": "aws.simplestorageserviceglacier",
     "label": "aws-simplestorageserviceglacier",
     "name": "Simple-Storage-Service-Glacier",
@@ -1842,11 +1849,11 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Simple-Storage-Service-Glacier.svg"
   },
   {
-    "type": "aws.simplestorageservice",
-    "label": "aws-simplestorageservice",
-    "name": "Simple-Storage-Service",
+    "type": "aws.simspaceweaver",
+    "label": "aws-simspaceweaver",
+    "name": "SimSpace-Weaver",
     "category": "AWS",
-    "icon": "/icons/aws/Simple-Storage-Service.svg"
+    "icon": "/icons/aws/SimSpace-Weaver.svg"
   },
   {
     "type": "aws.sitetositevpn",
@@ -1856,18 +1863,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Site-to-Site-VPN.svg"
   },
   {
-    "type": "aws.snowballedge",
-    "label": "aws-snowballedge",
-    "name": "Snowball-Edge",
-    "category": "AWS",
-    "icon": "/icons/aws/Snowball-Edge.svg"
-  },
-  {
     "type": "aws.snowball",
     "label": "aws-snowball",
     "name": "Snowball",
     "category": "AWS",
     "icon": "/icons/aws/Snowball.svg"
+  },
+  {
+    "type": "aws.snowballedge",
+    "label": "aws-snowballedge",
+    "name": "Snowball-Edge",
+    "category": "AWS",
+    "icon": "/icons/aws/Snowball-Edge.svg"
   },
   {
     "type": "aws.snowcone",
@@ -2045,20 +2052,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Trusted-Advisor.svg"
   },
   {
-    "type": "aws.vmwarecloudonaws",
-    "label": "aws-vmwarecloudonaws",
-    "name": "VMware-Cloud-on-AWS",
-    "category": "AWS",
-    "icon": "/icons/aws/VMware-Cloud-on-AWS.svg"
-  },
-  {
-    "type": "aws.vpclattice",
-    "label": "aws-vpclattice",
-    "name": "VPC-Lattice",
-    "category": "AWS",
-    "icon": "/icons/aws/VPC-Lattice.svg"
-  },
-  {
     "type": "aws.verifiedaccess",
     "label": "aws-verifiedaccess",
     "name": "Verified-Access",
@@ -2078,6 +2071,20 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "Virtual-Private-Cloud",
     "category": "AWS",
     "icon": "/icons/aws/Virtual-Private-Cloud.svg"
+  },
+  {
+    "type": "aws.vmwarecloudonaws",
+    "label": "aws-vmwarecloudonaws",
+    "name": "VMware-Cloud-on-AWS",
+    "category": "AWS",
+    "icon": "/icons/aws/VMware-Cloud-on-AWS.svg"
+  },
+  {
+    "type": "aws.vpclattice",
+    "label": "aws-vpclattice",
+    "name": "VPC-Lattice",
+    "category": "AWS",
+    "icon": "/icons/aws/VPC-Lattice.svg"
   },
   {
     "type": "aws.waf",
@@ -2108,18 +2115,18 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "icon": "/icons/aws/Wickr.svg"
   },
   {
-    "type": "aws.workdocssdk",
-    "label": "aws-workdocssdk",
-    "name": "WorkDocs-SDK",
-    "category": "AWS",
-    "icon": "/icons/aws/WorkDocs-SDK.svg"
-  },
-  {
     "type": "aws.workdocs",
     "label": "aws-workdocs",
     "name": "WorkDocs",
     "category": "AWS",
     "icon": "/icons/aws/WorkDocs.svg"
+  },
+  {
+    "type": "aws.workdocssdk",
+    "label": "aws-workdocssdk",
+    "name": "WorkDocs-SDK",
+    "category": "AWS",
+    "icon": "/icons/aws/WorkDocs-SDK.svg"
   },
   {
     "type": "aws.worklink",
@@ -2148,13 +2155,6 @@ export const nodeRegistry: EditorNodeDefinition[] = [
     "name": "X-Ray",
     "category": "AWS",
     "icon": "/icons/aws/X-Ray.svg"
-  },
-  {
-    "type": "aws.repost",
-    "label": "aws-repost",
-    "name": "rePost",
-    "category": "AWS",
-    "icon": "/icons/aws/rePost.svg"
   }
 ].map((node) => ({
   ...node,

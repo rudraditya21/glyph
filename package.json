@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:nodes": "tsx scripts/generate-node-registry.ts"
+    "generate:nodes": "tsx scripts/generate-node-registry.ts",
+    "check:nodes": "npm run generate:nodes && git diff --exit-code",
+    "prebuild": "npm run check:nodes"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
