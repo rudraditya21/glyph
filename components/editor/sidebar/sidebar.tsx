@@ -1,22 +1,71 @@
-import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { nodeRegistry } from "../nodes/registry";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from "@/components/ui/tooltip";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useMemo, useState } from "react";
 
 interface SidebarProps {
   addNode: (type: string) => void;
 }
 
 export default function Sidebar({ addNode }: SidebarProps) {
-  const groupedNodes = nodeRegistry.reduce((acc, node) => {
-    if (!acc[node.category]) {
-      acc[node.category] = [];
-    }
-    acc[node.category].push(node);
-    return acc;
-  }, {} as Record<string, typeof nodeRegistry>);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<string | null>("All");
+
+  const categories = Array.from(
+    new Set(nodeRegistry.map((node) => node.category))
+  );
+
+  const filteredNodes = useMemo(() => {
+    return nodeRegistry.filter((node) => {
+      const matchesSearch =
+        node.name
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        node.type
+          .toLowerCase()
+          .includes(search.toLowerCase());
+
+      const matchesCategory =
+        category === "All" ||
+        node.category === category;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [search, category]);
+
+  const groupedNodes = filteredNodes.reduce(
+    (acc, node) => {
+      if (!acc[node.category]) {
+        acc[node.category] = [];
+      }
+
+      acc[node.category].push(node);
+
+      return acc;
+    },
+    {} as Record<string, typeof nodeRegistry>
+  );
 
   return (
     <TooltipProvider>
@@ -28,7 +77,39 @@ export default function Sidebar({ addNode }: SidebarProps) {
           </SheetDescription>
         </SheetHeader>
 
-        <div className="mb-6 flex-1 overflow-y-auto px-4">
+        <div className="mt-6 flex gap-2 px-4">
+          <Input
+            placeholder="Search nodes..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+          <Select
+            value={category}
+            onValueChange={setCategory}
+          >
+            <SelectTrigger className="w-32.5">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+
+            <SelectContent>
+              <SelectItem value="All">
+                All
+              </SelectItem>
+
+              {categories.map((item) => (
+                <SelectItem
+                  key={item}
+                  value={item}
+                >
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="mt-4 mb-6 flex-1 overflow-y-auto px-4">
           {Object.entries(groupedNodes).map(
             ([category, nodes], index) => (
               <div key={category}>
@@ -42,7 +123,9 @@ export default function Sidebar({ addNode }: SidebarProps) {
                       <TooltipTrigger>
                         <Button
                           variant="outline"
-                          onClick={() => addNode(node.type)}
+                          onClick={() =>
+                            addNode(node.type)
+                          }
                           className="h-20 w-20 rounded-xl p-3"
                         >
                           <Image
@@ -67,6 +150,12 @@ export default function Sidebar({ addNode }: SidebarProps) {
                   )}
               </div>
             )
+          )}
+
+          {filteredNodes.length === 0 && (
+            <p className="mt-10 text-center text-sm text-muted-foreground">
+              No nodes found
+            </p>
           )}
         </div>
       </SheetContent>
