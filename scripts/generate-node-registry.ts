@@ -8,7 +8,7 @@ import { parseDefaultIcon } from "./parsers/default.parser";
 const ICON_ROOT = path.resolve("public/icons");
 
 const OUTPUT = path.resolve(
-  "components/editor/nodes/registry/index.ts",
+  "components/editor/nodes/registry/generated.ts",
 );
 
 const COMPONENT_IMPORT =
