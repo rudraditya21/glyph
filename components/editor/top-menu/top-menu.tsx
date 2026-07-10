@@ -1,17 +1,17 @@
-import { Redo, Undo, Copy, Trash, Clipboard } from "lucide-react"
-import MenuItem from "./menu-item"
-import { Separator } from "@/components/ui/separator"
+import { Redo, Undo, Copy, Trash, Clipboard } from "lucide-react";
+import MenuItem from "./menu-item";
+import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/editor-store";
 
 export default function TopMenu() {
-  const undo = useEditorStore(s => s.undo)
-  const redo = useEditorStore(s => s.redo)
-  const copy = useEditorStore(s => s.copySelected)
-  const paste = useEditorStore(s => s.paste)
-  const remove = useEditorStore(s => s.deleteSelected)
+  const undo = useEditorStore((s) => s.undo);
+  const redo = useEditorStore((s) => s.redo);
+  const copy = useEditorStore((s) => s.copySelected);
+  const paste = useEditorStore((s) => s.paste);
+  const remove = useEditorStore((s) => s.deleteSelected);
 
-  const canUndo = useEditorStore(s => s.history.length > 0)
-  const canRedo = useEditorStore(s => s.future.length > 0)
+  const canUndo = useEditorStore((s) => s.history.length > 0);
+  const canRedo = useEditorStore((s) => s.future.length > 0);
 
   const menuGroups = [
     [
@@ -22,16 +22,19 @@ export default function TopMenu() {
       { icon: Copy, action: copy, disabled: false },
       { icon: Clipboard, action: paste, disabled: false },
     ],
-    [
-      { icon: Trash, action: remove, disabled: false },
-    ]
+    [{ icon: Trash, action: remove, disabled: false }],
   ];
   return (
     <div className="flex items-center gap-2 px-4 py-2 bg-white border rounded-2xl">
       {menuGroups.map((group, groupIndex) => (
         <div key={groupIndex} className="flex items-center gap-2">
           {group.map((item, index) => (
-            <MenuItem key={index} icon={item.icon} onClick={item.action} disabled={item.disabled} />
+            <MenuItem
+              key={index}
+              icon={item.icon}
+              onClick={item.action}
+              disabled={item.disabled}
+            />
           ))}
 
           {groupIndex !== menuGroups.length - 1 && (
@@ -40,5 +43,5 @@ export default function TopMenu() {
         </div>
       ))}
     </div>
-  )
+  );
 }

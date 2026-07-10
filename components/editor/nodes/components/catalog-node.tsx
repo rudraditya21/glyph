@@ -7,14 +7,13 @@ export default function CatalogNode({ data }: NodeProps) {
       <Image
         src={data.icon as string}
         alt={data.label as string}
-        width={40} height={40}
+        width={40}
+        height={40}
       />
-      <h3 className="text-center font-medium">
-        {data.label as string}
-      </h3>
+      <h3 className="text-center font-medium">{data.label as string}</h3>
 
       <Handle id="input" type="target" position={Position.Left} />
       <Handle id="output" type="source" position={Position.Right} />
     </div>
-  )
+  );
 }

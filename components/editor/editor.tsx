@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { ReactFlow, Background, Controls, Panel } from "@xyflow/react"
-import '@xyflow/react/dist/style.css'
+import { ReactFlow, Background, Controls, Panel } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
 import Sidebar from "./sidebar/sidebar";
@@ -13,22 +13,22 @@ import { useEditorStore } from "@/store/editor-store";
 import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 
 const nodeTypes = Object.fromEntries(
-  nodeRegistry.map((node) => [node.type, node.component])
-)
+  nodeRegistry.map((node) => [node.type, node.component]),
+);
 
 export default function Editor() {
-  useEditorShortcuts()
+  useEditorShortcuts();
 
-  const nodes = useEditorStore(state => state.nodes)
-  const edges = useEditorStore(state => state.edges)
+  const nodes = useEditorStore((state) => state.nodes);
+  const edges = useEditorStore((state) => state.edges);
 
-  const onNodesChange = useEditorStore(state => state.onNodesChange)
-  const onEdgesChange = useEditorStore(state => state.onEdgesChange)
-  const onConnect = useEditorStore(state => state.onConnect)
+  const onNodesChange = useEditorStore((state) => state.onNodesChange);
+  const onEdgesChange = useEditorStore((state) => state.onEdgesChange);
+  const onConnect = useEditorStore((state) => state.onConnect);
 
-  const addNode = useEditorStore(state => state.addNode)
+  const addNode = useEditorStore((state) => state.addNode);
 
-  const selectNodes = useEditorStore(s => s.selectNodes)
+  const selectNodes = useEditorStore((s) => s.selectNodes);
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -41,16 +41,16 @@ export default function Editor() {
         deleteKeyCode={null}
         nodeTypes={nodeTypes}
         onSelectionChange={(elements) => {
-          const ids = elements.nodes.map(n => n.id)
-          selectNodes(ids)
+          const ids = elements.nodes.map((n) => n.id);
+          selectNodes(ids);
         }}
         onNodeDragStart={() => {
-          useEditorStore.getState().saveHistory()
+          useEditorStore.getState().saveHistory();
         }}
         fitView
         fitViewOptions={{
           padding: 0.5,
-          maxZoom: 0.85
+          maxZoom: 0.85,
         }}
         minZoom={0.2}
         maxZoom={1.5}
@@ -71,5 +71,5 @@ export default function Editor() {
         <Controls />
       </ReactFlow>
     </div>
-  )
+  );
 }

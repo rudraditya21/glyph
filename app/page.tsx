@@ -1,11 +1,11 @@
-import ThemeToggle from "@/components/theme-toggle"
-import { Lobster } from "next/font/google"
-import Link from "next/link"
+import ThemeToggle from "@/components/theme-toggle";
+import { Lobster } from "next/font/google";
+import Link from "next/link";
 
 const lobster = Lobster({
-  weight: ['400'],
-  subsets: ['latin', 'latin-ext']
-})
+  weight: ["400"],
+  subsets: ["latin", "latin-ext"],
+});
 
 export default function Home() {
   return (
@@ -16,12 +16,11 @@ export default function Home() {
         <ThemeToggle />
       </header>
       {/* Body */}
-      <div className="min-h-[90svh]">
-      </div>
+      <div className="min-h-[90svh]"></div>
       {/* Footer */}
       <footer className="border-t px-6 border-dashed">
         <Link href="#">Github</Link>
       </footer>
     </div>
-  )
+  );
 }
