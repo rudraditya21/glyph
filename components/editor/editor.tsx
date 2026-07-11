@@ -74,16 +74,7 @@ export default function Editor() {
           <ThemeToggle />
         </Panel>
         <Background />
-        <Controls
-          className="
-    !overflow-hidden
-    !rounded-xl
-    !border
-    !border-border
-    !bg-card
-    !shadow-md
-  "
-        />
+        <Controls className=" !overflow-hidden !rounded-xl !border !border-border !bg-card !shadow-md" />
       </ReactFlow>
     </div>
   );
