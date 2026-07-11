@@ -1,5 +1,8 @@
+"use client";
+
+import { useVirtualizer } from "@tanstack/react-virtual";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import {
   SheetContent,
   SheetDescription,
@@ -34,15 +36,19 @@ export default function Sidebar({ addNode }: SidebarProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | null>("All");
 
-  const categories = Array.from(
-    new Set(nodeRegistry.map((node) => node.category)),
-  );
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const categories = useMemo(() => {
+    return Array.from(new Set(nodeRegistry.map((node) => node.category)));
+  }, []);
 
   const filteredNodes = useMemo(() => {
+    const query = search.toLowerCase();
+
     return nodeRegistry.filter((node) => {
       const matchesSearch =
-        node.name.toLowerCase().includes(search.toLowerCase()) ||
-        node.type.toLowerCase().includes(search.toLowerCase());
+        node.name.toLowerCase().includes(query) ||
+        node.type.toLowerCase().includes(query);
 
       const matchesCategory = category === "All" || node.category === category;
 
@@ -50,26 +56,45 @@ export default function Sidebar({ addNode }: SidebarProps) {
     });
   }, [search, category]);
 
-  const groupedNodes = filteredNodes.reduce(
-    (acc, node) => {
-      if (!acc[node.category]) {
-        acc[node.category] = [];
-      }
+  const rows = useMemo(() => {
+    const result = [];
 
-      acc[node.category].push(node);
+    for (let i = 0; i < filteredNodes.length; i += 4) {
+      result.push(filteredNodes.slice(i, i + 4));
+    }
 
-      return acc;
+    return result;
+  }, [filteredNodes]);
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => scrollRef.current,
+    estimateSize: () => 110,
+    overscan: 5,
+    initialRect: {
+      width: 300,
+      height: 600,
     },
-    {} as Record<string, typeof nodeRegistry>,
-  );
+  });
+
+  useEffect(() => {
+    const element = scrollRef.current;
+    if (!element) return;
+    const observer = new ResizeObserver(() => {
+      rowVirtualizer.measure();
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [filteredNodes]);
 
   return (
     <TooltipProvider>
-      <SheetContent className="flex flex-col">
+      <SheetContent className="flex min-h-0 flex-col">
         <SheetHeader>
           <SheetTitle>Catalog</SheetTitle>
+
           <SheetDescription>
-            Drag or click a node to add it to your workflow
+            Click a node to add it to your workflow
           </SheetDescription>
         </SheetHeader>
 
@@ -80,8 +105,11 @@ export default function Sidebar({ addNode }: SidebarProps) {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="w-32.5">
+          <Select
+            value={category}
+            onValueChange={(value) => setCategory(value ?? "All")}
+          >
+            <SelectTrigger className="w-32">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
 
@@ -97,46 +125,59 @@ export default function Sidebar({ addNode }: SidebarProps) {
           </Select>
         </div>
 
-        <div className="mt-4 mb-6 flex-1 overflow-y-auto px-4">
-          {Object.entries(groupedNodes).map(([category, nodes], index) => (
-            <div key={category}>
-              <h3 className="mb-3 text-sm font-semibold">{category}</h3>
-
-              <div className="grid grid-cols-4 gap-3">
-                {nodes.map((node) => (
-                  <Tooltip key={node.type}>
-                    <TooltipTrigger>
-                      <Button
-                        variant="outline"
-                        onClick={() => addNode(node.type)}
-                        className="h-20 w-20 rounded-xl p-3"
-                      >
-                        <Image
-                          src={node.icon as string}
-                          alt={node.name}
-                          width={32}
-                          height={32}
-                        />
-                      </Button>
-                    </TooltipTrigger>
-
-                    <TooltipContent>
-                      <p>{node.name}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
-
-              {index < Object.entries(groupedNodes).length - 1 && (
-                <Separator className="my-6" />
-              )}
-            </div>
-          ))}
-
-          {filteredNodes.length === 0 && (
+        <div ref={scrollRef} className="mt-4 flex-1 overflow-y-auto px-4">
+          {filteredNodes.length === 0 ? (
             <p className="mt-10 text-center text-sm text-muted-foreground">
               No nodes found
             </p>
+          ) : (
+            <div
+              className="relative w-full"
+              style={{
+                height: rowVirtualizer.getTotalSize(),
+              }}
+            >
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const row = rows[virtualRow.index];
+
+                return (
+                  <div
+                    key={virtualRow.key}
+                    className="absolute left-0 top-0 grid w-full grid-cols-4 gap-3"
+                    style={{
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                  >
+                    {row.map((node) => (
+                      <Tooltip key={node.type}>
+                        <TooltipTrigger>
+                          <Button
+                            variant="outline"
+                            onClick={() => addNode(node.type)}
+                            className="
+                                h-20
+                                w-20
+                                rounded-xl
+                                p-3
+                              "
+                          >
+                            <Image
+                              src={node.icon as string}
+                              alt={node.name}
+                              width={32}
+                              height={32}
+                              loading="lazy"
+                            />
+                          </Button>
+                        </TooltipTrigger>
+
+                        <TooltipContent>{node.name}</TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </SheetContent>
