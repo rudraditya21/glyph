@@ -1,11 +1,14 @@
 "use client";
 
 import gsap from "gsap";
-import { Moon,Sun } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useRef } from "react";
+
+import { useThemeStore } from "@/store/theme-store";
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+  const dark = useThemeStore((s) => s.dark);
+  const setDark = useThemeStore((s) => s.setDark);
   const sunRef = useRef<HTMLDivElement>(null);
   const moonRef = useRef<HTMLDivElement>(null);
 

@@ -1,4 +1,4 @@
-import { Clipboard,Copy, Redo, Trash, Undo } from "lucide-react";
+import { Clipboard, Copy, Redo, Trash, Undo } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/editor-store";
@@ -27,7 +27,7 @@ export default function TopMenu() {
     [{ icon: Trash, action: remove, disabled: false }],
   ];
   return (
-    <div className="flex items-center gap-2 px-4 py-2 bg-white border rounded-2xl">
+    <div className="flex items-center gap-2 px-4 py-2 bg-background text-foreground border rounded-2xl">
       {menuGroups.map((group, groupIndex) => (
         <div key={groupIndex} className="flex items-center gap-2">
           {group.map((item, index) => (

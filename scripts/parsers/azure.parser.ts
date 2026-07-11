@@ -4,14 +4,10 @@ export function parseAzureIcon(filename: string) {
     .replace(/^\d+-icon-service-/i, "")
     .replace(/-/g, " ");
 
-  const key = name
-    .replace(/\s+/g, "")
-    .toLowerCase();
+  const key = name.replace(/\s+/g, "").toLowerCase();
 
   return {
     key,
-    name: name.replace(/\b\w/g, (char) =>
-      char.toUpperCase()
-    ),
+    name: name.replace(/\b\w/g, (char) => char.toUpperCase()),
   };
 }

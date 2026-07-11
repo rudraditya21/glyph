@@ -11,7 +11,7 @@ import {
 import { create } from "zustand";
 
 import { nodeRegistry } from "@/components/editor/nodes/registry";
-import { EditorEdge,EditorNode } from "@/types/editor";
+import { EditorEdge, EditorNode } from "@/types/editor";
 
 interface EditorClipboard {
   nodes: EditorNode[];

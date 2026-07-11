@@ -7,22 +7,16 @@ import { parseDefaultIcon } from "./parsers/default.parser";
 
 const ICON_ROOT = path.resolve("public/icons");
 
-const OUTPUT = path.resolve(
-  "components/editor/nodes/registry/generated.ts",
-);
+const OUTPUT = path.resolve("components/editor/nodes/registry/generated.ts");
 
-const COMPONENT_IMPORT =
-  `import CatalogNode from "../components/catalog-node";`;
+const COMPONENT_IMPORT = `import CatalogNode from "../components/catalog-node";`;
 
 interface ParsedIcon {
   key: string;
   name: string;
 }
 
-function parseIcon(
-  provider: string,
-  filename: string,
-): ParsedIcon {
+function parseIcon(provider: string, filename: string): ParsedIcon {
   switch (provider.toLowerCase()) {
     case "aws":
       return parseAwsIcon(filename);
@@ -35,46 +29,26 @@ function parseIcon(
   }
 }
 
-
 function generateNodes() {
   if (!fs.existsSync(ICON_ROOT)) {
-    throw new Error(
-      `Icon directory does not exist: ${ICON_ROOT}`,
-    );
+    throw new Error(`Icon directory does not exist: ${ICON_ROOT}`);
   }
 
   const providers = fs
     .readdirSync(ICON_ROOT)
-    .filter((file) =>
-      fs
-        .statSync(path.join(ICON_ROOT, file))
-        .isDirectory(),
-    );
-
+    .filter((file) => fs.statSync(path.join(ICON_ROOT, file)).isDirectory());
 
   const nodes = [];
 
-
   for (const provider of providers) {
-    const providerPath = path.join(
-      ICON_ROOT,
-      provider,
-    );
-
+    const providerPath = path.join(ICON_ROOT, provider);
 
     const icons = fs
       .readdirSync(providerPath)
-      .filter((file) =>
-        file.endsWith(".svg"),
-      );
-
+      .filter((file) => file.endsWith(".svg"));
 
     for (const icon of icons) {
-      const parsed = parseIcon(
-        provider,
-        icon,
-      );
-
+      const parsed = parseIcon(provider, icon);
 
       nodes.push({
         type: `${provider}.${parsed.key}`,
@@ -83,25 +57,18 @@ function generateNodes() {
 
         name: parsed.name,
 
-        category:
-          provider.toUpperCase(),
+        category: provider.toUpperCase(),
 
-        icon:
-          `/icons/${provider}/${icon}`,
+        icon: `/icons/${provider}/${icon}`,
       });
     }
   }
 
-
-  return nodes.sort((a, b) =>
-    a.type.localeCompare(b.type),
-  );
+  return nodes.sort((a, b) => a.type.localeCompare(b.type));
 }
-
 
 function writeRegistry() {
   const nodes = generateNodes();
-
 
   const content = `// THIS FILE IS AUTO-GENERATED.
 // DO NOT EDIT MANUALLY.
@@ -118,26 +85,13 @@ ${JSON.stringify(nodes, null, 2)}
 }));
 `;
 
+  fs.mkdirSync(path.dirname(OUTPUT), {
+    recursive: true,
+  });
 
-  fs.mkdirSync(
-    path.dirname(OUTPUT),
-    {
-      recursive: true,
-    },
-  );
+  fs.writeFileSync(OUTPUT, content, "utf8");
 
-
-  fs.writeFileSync(
-    OUTPUT,
-    content,
-    "utf8",
-  );
-
-
-  console.log(
-    `Generated ${nodes.length} nodes`,
-  );
+  console.log(`Generated ${nodes.length} nodes`);
 }
-
 
 writeRegistry();

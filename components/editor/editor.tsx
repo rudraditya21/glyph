@@ -2,12 +2,13 @@
 
 import "@xyflow/react/dist/style.css";
 
-import { Background, Controls, Panel,ReactFlow } from "@xyflow/react";
+import { Background, Controls, Panel, ReactFlow } from "@xyflow/react";
 
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
 import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 import { useEditorStore } from "@/store/editor-store";
+import { useThemeStore } from "@/store/theme-store";
 
 import { nodeRegistry } from "./nodes/registry";
 import Sidebar from "./sidebar/sidebar";
@@ -20,6 +21,8 @@ const nodeTypes = Object.fromEntries(
 
 export default function Editor() {
   useEditorShortcuts();
+
+  const dark = useThemeStore((state) => state.dark);
 
   const nodes = useEditorStore((state) => state.nodes);
   const edges = useEditorStore((state) => state.edges);
@@ -37,6 +40,7 @@ export default function Editor() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        colorMode={dark ? "dark" : "light"}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
