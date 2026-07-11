@@ -3,17 +3,23 @@ import Image from "next/image";
 
 export default function CatalogNode({ data }: NodeProps) {
   return (
-    <div className="w-28 h-28 rounded-xl border bg-background text-foreground shadow flex flex-col items-center justify-center">
-      <Image
-        src={data.icon as string}
-        alt={data.label as string}
-        width={40}
-        height={40}
-      />
-      <h3 className="text-center font-medium">{data.label as string}</h3>
-
-      <Handle id="input" type="target" position={Position.Left} />
-      <Handle id="output" type="source" position={Position.Right} />
+    <div className="flex flex-col items-center">
+      <div className="w-28 h-28 rounded-xl border bg-background text-foreground shadow flex flex-col items-center justify-center">
+        <Image
+          src={data.icon as string}
+          alt={data.label as string}
+          width={40}
+          height={40}
+        />
+        <Handle id="input" type="target" position={Position.Left} />
+        <Handle id="output" type="source" position={Position.Right} />
+      </div>
+      <span
+        className="mt-2 max-w-28 truncate text-center text-xs font-medium text-muted-foreground"
+        title={data.label as string}
+      >
+        {data.label as string}
+      </span>
     </div>
   );
 }
