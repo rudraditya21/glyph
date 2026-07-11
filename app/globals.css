@@ -153,3 +153,15 @@ html {
     background-size: 180px 180px;
   }
 }
+
+.react-flow__controls-button {
+  @apply !bg-card !text-foreground !border-border;
+}
+
+.react-flow__controls-button:hover {
+  @apply !bg-accent;
+}
+
+.react-flow__controls-button svg {
+  @apply !fill-foreground;
+}
