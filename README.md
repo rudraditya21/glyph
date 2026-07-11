@@ -6,15 +6,15 @@ The goal of Glyph is to provide a fast, modern, and extensible editor experience
 
 ## Features
 
-* Visual node-based editor
-* Drag and connect workflow canvas
-* Custom node registry system
-* Searchable node catalog
-* Theme support (light/dark mode)
-* Undo and redo history
-* Copy, paste, and delete operations
-* Extensible architecture for adding new node types
-* Optimized catalog rendering for large collections
+- Visual node-based editor
+- Drag and connect workflow canvas
+- Custom node registry system
+- Searchable node catalog
+- Theme support (light/dark mode)
+- Undo and redo history
+- Copy, paste, and delete operations
+- Extensible architecture for adding new node types
+- Optimized catalog rendering for large collections
 
 ## Getting Started
 
