@@ -1,4 +1,4 @@
-import { Clipboard, Copy, Redo, Trash, Undo } from "lucide-react";
+import { Clipboard, Copy, Redo, Save, Trash, Undo } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/editor-store";
@@ -15,6 +15,14 @@ export default function TopMenu() {
   const canUndo = useEditorStore((s) => s.history.length > 0);
   const canRedo = useEditorStore((s) => s.future.length > 0);
 
+  function save() {
+    const state = useEditorStore.getState();
+    console.log("Workflow Saved:", {
+      nodes: state.nodes,
+      edges: state.edges,
+    });
+  }
+
   const menuGroups = [
     [
       { icon: Undo, action: undo, disabled: !canUndo },
@@ -25,6 +33,7 @@ export default function TopMenu() {
       { icon: Clipboard, action: paste, disabled: false },
     ],
     [{ icon: Trash, action: remove, disabled: false }],
+    [{ icon: Save, action: save, disabled: false }],
   ];
   return (
     <div className="flex items-center gap-2 px-4 py-2 bg-background text-foreground border rounded-2xl">
