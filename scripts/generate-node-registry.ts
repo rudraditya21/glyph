@@ -4,6 +4,7 @@ import path from "path";
 import { parseAwsIcon } from "./parsers/aws.parser";
 import { parseAzureIcon } from "./parsers/azure.parser";
 import { parseDefaultIcon } from "./parsers/default.parser";
+import { parseGcpIcon } from "./parsers/gcp.parser";
 
 const ICON_ROOT = path.resolve("public/icons");
 
@@ -20,6 +21,9 @@ function parseIcon(provider: string, filename: string): ParsedIcon {
   switch (provider.toLowerCase()) {
     case "aws":
       return parseAwsIcon(filename);
+
+    case "gcp":
+      return parseGcpIcon(filename);
 
     case "azure":
       return parseAzureIcon(filename);
