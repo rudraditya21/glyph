@@ -56,13 +56,15 @@ export default function Sidebar({ addNode }: SidebarProps) {
 
   const catalogEntries = useMemo<CatalogEntry[]>(
     () =>
-      nodeRegistry.map((node) => ({
-        type: node.type,
-        name: node.name,
-        category: node.category,
-        icon: node.icon,
-        searchText: `${node.name} ${node.type}`.toLowerCase(),
-      })),
+      nodeRegistry
+        .filter((node) => !node.hiddenInCatalog)
+        .map((node) => ({
+          type: node.type,
+          name: node.name,
+          category: node.category,
+          icon: node.icon,
+          searchText: `${node.name} ${node.type}`.toLowerCase(),
+        })),
     [],
   );
 

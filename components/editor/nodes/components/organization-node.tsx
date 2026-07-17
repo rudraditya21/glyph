@@ -1,42 +1,17 @@
 import { NodeProps, NodeResizer } from "@xyflow/react";
-import type { CSSProperties } from "react";
+import { useRef } from "react";
 
+import { useEditorStore } from "@/store/editor-store";
 import { EditorNode } from "@/types/editor";
 
-const organizationNodeStyles = {
-  frame: {
-    shell:
-      "border-dashed bg-background/55 shadow-[0_0_0_1px_var(--border)_inset] backdrop-blur-[2px]",
-    header:
-      "rounded-full border border-border/80 bg-background/95 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground shadow-sm",
-    body: "text-muted-foreground",
-  },
-  group: {
-    shell:
-      "border-solid bg-secondary/35 shadow-[0_0_0_1px_var(--border)_inset] backdrop-blur-[1px]",
-    header:
-      "rounded-xl border border-border/80 bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-sm",
-    body: "text-muted-foreground",
-  },
-  section: {
-    shell:
-      "border-solid bg-[color-mix(in_oklch,var(--muted),transparent_22%)] shadow-[0_0_0_1px_var(--border)_inset]",
-    header:
-      "rounded-2xl bg-foreground px-4 py-3 text-sm font-semibold text-background shadow-sm",
-    body: "text-foreground/70",
-  },
-} as const;
-
 export default function OrganizationNode({
+  id,
   data,
   selected,
 }: NodeProps<EditorNode>) {
-  const variant = data.layoutVariant ?? "frame";
-  const styles = organizationNodeStyles[variant];
-  const accentColor = data.accentColor ?? "var(--primary)";
-  const accentStyle = {
-    "--organization-accent": accentColor,
-  } as CSSProperties;
+  const updateNodeLabel = useEditorStore((state) => state.updateNodeLabel);
+  const saveHistory = useEditorStore((state) => state.saveHistory);
+  const editingRef = useRef(false);
 
   return (
     <>
@@ -44,53 +19,48 @@ export default function OrganizationNode({
         isVisible={selected}
         minWidth={280}
         minHeight={160}
-        color="var(--organization-accent)"
-        lineStyle={{ borderColor: accentColor, opacity: 0.7 }}
+        color="var(--primary)"
+        lineStyle={{ borderColor: "var(--border)", opacity: 0.9 }}
         handleStyle={{
           width: 12,
           height: 12,
           borderWidth: 2,
           borderColor: "var(--background)",
-          backgroundColor: accentColor,
+          backgroundColor: "var(--primary)",
           borderRadius: 999,
         }}
       />
       <div
-        style={accentStyle}
-        className={`h-full w-full rounded-[26px] border p-3 text-left ${styles.shell}`}
+        className="h-full w-full rounded-[28px] border-2 border-dashed border-border bg-background/50 p-4 text-left shadow-[0_0_0_1px_var(--border)_inset] backdrop-blur-[2px]"
       >
-        <div className="organization-node__header flex items-start justify-between gap-3">
-          <div
-            className={styles.header}
-            style={{
-              borderColor:
-                variant === "section" ? "transparent" : "var(--organization-accent)",
-              color: variant === "section" ? undefined : "var(--organization-accent)",
-              backgroundColor:
-                variant === "section"
-                  ? "var(--organization-accent)"
-                  : undefined,
-            }}
-          >
-            <div>{data.label}</div>
-            {data.description ? (
-              <div className="mt-1 text-[11px] font-normal normal-case tracking-normal opacity-80">
-                {data.description}
-              </div>
-            ) : null}
-          </div>
-          <div className="rounded-full border border-border/70 bg-background/80 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            {variant}
+        <div className="organization-node__header -mt-8 mb-4 flex">
+          <div className="rounded-full border border-border bg-background px-2 py-1 shadow-sm">
+            <input
+              value={String(data.label ?? "")}
+              onChange={(event) => updateNodeLabel(id, event.target.value)}
+              onFocus={() => {
+                if (editingRef.current) return;
+
+                saveHistory();
+                editingRef.current = true;
+              }}
+              onBlur={() => {
+                editingRef.current = false;
+              }}
+              onMouseDown={(event) => {
+                event.stopPropagation();
+              }}
+              onDoubleClick={(event) => {
+                event.stopPropagation();
+              }}
+              className="nodrag nopan min-w-36 bg-transparent px-2 text-sm font-medium text-foreground outline-none"
+              aria-label="Container title"
+            />
           </div>
         </div>
 
-        <div
-          className={`mt-4 flex h-[calc(100%-4.25rem)] items-end rounded-[18px] border border-dashed p-4 text-xs ${styles.body}`}
-          style={{
-            borderColor: "color-mix(in oklch, var(--organization-accent), var(--border) 60%)",
-          }}
-        >
-          Arrange related nodes inside this {variant}.
+        <div className="flex h-[calc(100%-2.5rem)] items-end rounded-[20px] border border-dashed border-border/70 p-4 text-xs text-muted-foreground">
+          Arrange related nodes inside this container.
         </div>
       </div>
     </>

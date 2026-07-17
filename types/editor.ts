@@ -1,12 +1,9 @@
 import { Edge, Node, NodeProps } from "@xyflow/react";
-import type { ComponentType,CSSProperties } from "react";
+import type { ComponentType, CSSProperties } from "react";
 
 export interface EditorNodeData extends Record<string, unknown> {
   label: string;
   icon?: string;
-  description?: string;
-  layoutVariant?: "frame" | "group" | "section";
-  accentColor?: string;
 }
 
 export type EditorNode = Node<EditorNodeData>;
@@ -18,6 +15,7 @@ export interface EditorNodeDefinition {
   name: string;
   category: string;
   icon?: string;
+  hiddenInCatalog?: boolean;
   component: ComponentType<NodeProps<EditorNode>>;
   initialData?: Partial<EditorNodeData>;
   initialNode?: Omit<

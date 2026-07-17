@@ -38,6 +38,7 @@ interface EditorState {
 
   addNode: (type: string) => void;
   deleteNode: (id: string) => void;
+  updateNodeLabel: (id: string, label: string) => void;
 
   onNodesChange(changes: NodeChange<EditorNode>[]): void;
   onEdgesChange(changes: EdgeChange<EditorEdge>[]): void;
@@ -125,6 +126,21 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       ),
     });
   },
+
+  updateNodeLabel: (id, label) =>
+    set((state) => ({
+      nodes: state.nodes.map((node) =>
+        node.id === id
+          ? {
+              ...node,
+              data: {
+                ...node.data,
+                label,
+              },
+            }
+          : node,
+      ),
+    })),
 
   onNodesChange: (changes) =>
     set((state) => ({

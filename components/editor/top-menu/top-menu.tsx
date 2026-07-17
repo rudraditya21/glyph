@@ -1,9 +1,16 @@
-import { Clipboard, Copy, Redo, Save, Trash, Undo } from "lucide-react";
+import { Clipboard, Copy, Redo, Save, Square, Trash, Undo } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/editor-store";
 
 import MenuItem from "./menu-item";
+
+interface MenuAction {
+  icon: Parameters<typeof MenuItem>[0]["icon"];
+  action: () => void;
+  disabled: boolean;
+  label?: string;
+}
 
 export default function TopMenu() {
   const undo = useEditorStore((s) => s.undo);
@@ -11,6 +18,7 @@ export default function TopMenu() {
   const copy = useEditorStore((s) => s.copySelected);
   const paste = useEditorStore((s) => s.paste);
   const remove = useEditorStore((s) => s.deleteSelected);
+  const addNode = useEditorStore((s) => s.addNode);
 
   const canUndo = useEditorStore((s) => s.history.length > 0);
   const canRedo = useEditorStore((s) => s.future.length > 0);
@@ -23,10 +31,18 @@ export default function TopMenu() {
     });
   }
 
-  const menuGroups = [
+  const menuGroups: MenuAction[][] = [
     [
       { icon: Undo, action: undo, disabled: !canUndo },
       { icon: Redo, action: redo, disabled: !canRedo },
+    ],
+    [
+      {
+        icon: Square,
+        action: () => addNode("layout.container"),
+        disabled: false,
+        label: "Add container",
+      },
     ],
     [
       { icon: Copy, action: copy, disabled: false },
@@ -45,6 +61,7 @@ export default function TopMenu() {
               icon={item.icon}
               onClick={item.action}
               disabled={item.disabled}
+              label={item.label}
             />
           ))}
 
