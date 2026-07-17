@@ -2,63 +2,47 @@
 
 import gsap from "gsap";
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import { useThemeStore } from "@/store/theme-store";
 
+function getIconState(dark: boolean) {
+  return {
+    sun: dark
+      ? { opacity: 0, rotate: 180, scale: 0 }
+      : { opacity: 1, rotate: 0, scale: 1 },
+    moon: dark
+      ? { opacity: 1, rotate: 0, scale: 1 }
+      : { opacity: 0, rotate: -180, scale: 0 },
+  };
+}
+
 export default function ThemeToggle() {
   const dark = useThemeStore((s) => s.dark);
-  const setDark = useThemeStore((s) => s.setDark);
+  const hydrated = useThemeStore((s) => s.hydrated);
+  const setThemeMode = useThemeStore((s) => s.setThemeMode);
   const sunRef = useRef<HTMLDivElement>(null);
   const moonRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    const isDark = stored ? stored === "dark" : prefersDark;
+  useLayoutEffect(() => {
+    if (!hydrated || isAnimatingRef.current) return;
 
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    const iconState = getIconState(dark);
 
-    gsap.set(
-      sunRef.current,
-      isDark
-        ? { opacity: 0, rotate: 180, scale: 0 }
-        : { opacity: 1, rotate: 0, scale: 1 },
-    );
-    gsap.set(
-      moonRef.current,
-      isDark
-        ? { opacity: 1, rotate: 0, scale: 1 }
-        : { opacity: 0, rotate: -180, scale: 0 },
-    );
-  }, []);
+    gsap.set(sunRef.current, iconState.sun);
+    gsap.set(moonRef.current, iconState.moon);
+  }, [dark, hydrated]);
 
   function toggle() {
+    if (!hydrated) return;
+
     const next = !dark;
     const outgoing = next ? sunRef.current : moonRef.current;
     const incoming = next ? moonRef.current : sunRef.current;
 
-    setDark(next);
-
-    const html = document.documentElement;
-    html.setAttribute("data-theme-transition", "");
-    void html.offsetHeight;
-
-    if (next) {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-
-    localStorage.setItem("theme", next ? "dark" : "light");
-
-    window.setTimeout(() => html.removeAttribute("data-theme-transition"), 420);
+    setThemeMode(next ? "dark" : "light", next);
+    isAnimatingRef.current = true;
 
     gsap
       .timeline()
@@ -80,7 +64,10 @@ export default function ThemeToggle() {
           ease: "power3.out",
         },
         "-=0.05",
-      );
+      )
+      .eventCallback("onComplete", () => {
+        isAnimatingRef.current = false;
+      });
   }
 
   return (
@@ -92,9 +79,12 @@ export default function ThemeToggle() {
       }}
     >
       <button
+        type="button"
         onClick={toggle}
+        disabled={!hydrated}
         className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur-md"
         aria-label="Toggle theme"
+        aria-pressed={dark}
       >
         <div ref={sunRef} className="absolute">
           <Sun size={18} />
