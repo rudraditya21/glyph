@@ -4,12 +4,13 @@ import "@xyflow/react/dist/style.css";
 
 import { Background, Controls, MiniMap, Panel, ReactFlow } from "@xyflow/react";
 
+import EditorEdgeComponent from "@/components/editor/edges/editor-edge";
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
 import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemeStore } from "@/store/theme-store";
-import { EditorEdge, EditorNode } from "@/types/editor";
+import type { EditorEdge, EditorNode } from "@/types/editor";
 
 import { nodeRegistry } from "./nodes/registry";
 import Sidebar from "./sidebar/sidebar";
@@ -19,6 +20,9 @@ import TopMenu from "./top-menu/top-menu";
 const nodeTypes = Object.fromEntries(
   nodeRegistry.map((node) => [node.type, node.component]),
 );
+const edgeTypes = {
+  editorEdge: EditorEdgeComponent,
+};
 
 export default function Editor() {
   useEditorShortcuts();
@@ -31,10 +35,12 @@ export default function Editor() {
   const onNodesChange = useEditorStore((state) => state.onNodesChange);
   const onEdgesChange = useEditorStore((state) => state.onEdgesChange);
   const onConnect = useEditorStore((state) => state.onConnect);
+  const onReconnect = useEditorStore((state) => state.onReconnect);
 
   const addNode = useEditorStore((state) => state.addNode);
 
   const selectNodes = useEditorStore((s) => s.selectNodes);
+  const selectEdges = useEditorStore((s) => s.selectEdges);
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -45,16 +51,19 @@ export default function Editor() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onReconnect={onReconnect}
+        edgesReconnectable
         deleteKeyCode={null}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         panOnScroll
         panOnScrollSpeed={0.9}
         panActivationKeyCode="Space"
         zoomActivationKeyCode={["Meta", "Control"]}
         zoomOnDoubleClick={false}
         onSelectionChange={(elements) => {
-          const ids = elements.nodes.map((n) => n.id);
-          selectNodes(ids);
+          selectNodes(elements.nodes.map((node) => node.id));
+          selectEdges(elements.edges.map((edge) => edge.id));
         }}
         onNodeDragStart={() => {
           useEditorStore.getState().saveHistory();
@@ -81,8 +90,15 @@ export default function Editor() {
         </Panel>
         <Panel position="bottom-center">
           <div className="rounded-full border border-border bg-background/90 px-4 py-2 text-xs text-muted-foreground shadow-sm backdrop-blur-md">
-            Scroll to pan. Hold <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">Ctrl</kbd> or{" "}
-            <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">Cmd</kbd> to zoom.
+            Scroll to pan. Hold{" "}
+            <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">
+              Ctrl
+            </kbd>{" "}
+            or{" "}
+            <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">
+              Cmd
+            </kbd>{" "}
+            to zoom.
           </div>
         </Panel>
         <Background />

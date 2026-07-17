@@ -59,9 +59,7 @@ export default function OrganizationNode({
           </div>
         </div>
 
-        <div className="flex h-[calc(100%-2.5rem)] items-end rounded-[20px] border border-dashed border-border/70 p-4 text-xs text-muted-foreground">
-          Arrange related nodes inside this container.
-        </div>
+        <div className="h-[calc(100%-2.5rem)] rounded-[20px] border border-dashed border-border/70 p-4" />
       </div>
     </>
   );

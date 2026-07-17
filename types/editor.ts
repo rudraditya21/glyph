@@ -6,8 +6,20 @@ export interface EditorNodeData extends Record<string, unknown> {
   icon?: string;
 }
 
+export type EditorEdgeRouting = "bezier" | "orthogonal" | "straight";
+export type EditorEdgeStyleVariant = "solid" | "dashed" | "muted" | "highlight";
+export type EditorEdgeMarkerKind = "none" | "arrow" | "arrowClosed";
+
+export interface EditorEdgeData extends Record<string, unknown> {
+  label: string;
+  routing: EditorEdgeRouting;
+  styleVariant: EditorEdgeStyleVariant;
+  markerStartKind: EditorEdgeMarkerKind;
+  markerEndKind: EditorEdgeMarkerKind;
+}
+
 export type EditorNode = Node<EditorNodeData>;
-export type EditorEdge = Edge<{ label?: string }>;
+export type EditorEdge = Edge<EditorEdgeData, "editorEdge">;
 
 export interface EditorNodeDefinition {
   type: string;
