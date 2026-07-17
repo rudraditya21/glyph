@@ -2,7 +2,7 @@
 
 import "@xyflow/react/dist/style.css";
 
-import { Background, Controls, Panel, ReactFlow } from "@xyflow/react";
+import { Background, Controls, MiniMap, Panel, ReactFlow } from "@xyflow/react";
 
 import ThemeToggle from "@/components/theme-toggle";
 import { Sheet } from "@/components/ui/sheet";
@@ -46,6 +46,11 @@ export default function Editor() {
         onConnect={onConnect}
         deleteKeyCode={null}
         nodeTypes={nodeTypes}
+        panOnScroll
+        panOnScrollSpeed={0.9}
+        panActivationKeyCode="Space"
+        zoomActivationKeyCode={["Meta", "Control"]}
+        zoomOnDoubleClick={false}
         onSelectionChange={(elements) => {
           const ids = elements.nodes.map((n) => n.id);
           selectNodes(ids);
@@ -70,11 +75,42 @@ export default function Editor() {
             <Sidebar addNode={addNode} />
           </Sheet>
         </Panel>
-        <Panel position="bottom-right">
+        <Panel position="top-left">
           <ThemeToggle />
         </Panel>
+        <Panel position="bottom-center">
+          <div className="rounded-full border border-border bg-background/90 px-4 py-2 text-xs text-muted-foreground shadow-sm backdrop-blur-md">
+            Scroll to pan. Hold <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">Ctrl</kbd> or{" "}
+            <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-foreground">Cmd</kbd> to zoom.
+          </div>
+        </Panel>
         <Background />
-        <Controls className=" !overflow-hidden !rounded-xl !border !border-border !bg-card !shadow-md" />
+        <MiniMap
+          position="bottom-left"
+          pannable
+          zoomable
+          ariaLabel="Canvas overview"
+          offsetScale={8}
+          zoomStep={12}
+          nodeBorderRadius={10}
+          nodeStrokeWidth={3}
+          bgColor={dark ? "var(--card)" : "var(--background)"}
+          maskColor={dark ? "rgb(255 255 255 / 0.08)" : "rgb(15 23 42 / 0.08)"}
+          maskStrokeColor={dark ? "var(--primary)" : "var(--foreground)"}
+          nodeColor={dark ? "var(--secondary)" : "var(--muted)"}
+          nodeStrokeColor={dark ? "var(--primary)" : "var(--foreground)"}
+          className="!overflow-hidden !rounded-2xl !border !border-border !shadow-md"
+        />
+        <Controls
+          position="bottom-right"
+          orientation="horizontal"
+          showInteractive={false}
+          fitViewOptions={{
+            padding: 0.5,
+            maxZoom: 0.85,
+          }}
+          className="!overflow-hidden !rounded-2xl !border !border-border !bg-card/95 !shadow-md !backdrop-blur-md"
+        />
       </ReactFlow>
     </div>
   );
