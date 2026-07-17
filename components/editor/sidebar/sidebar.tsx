@@ -182,7 +182,7 @@ export default function Sidebar({ addNode }: SidebarProps) {
         <Select
           value={category}
           onValueChange={(value) => {
-            setCategory(value);
+            setCategory(value ?? ALL_CATEGORY);
             setVisibleChunks(1);
           }}
         >

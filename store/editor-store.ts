@@ -97,7 +97,9 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       data: {
         label: definition.label,
         icon: definition.icon,
+        ...definition.initialData,
       },
+      ...definition.initialNode,
     };
     set({
       history: pushHistory(

@@ -9,6 +9,7 @@ import { Sheet } from "@/components/ui/sheet";
 import { useEditorShortcuts } from "@/hooks/use-editor-shortcuts";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemeStore } from "@/store/theme-store";
+import { EditorEdge, EditorNode } from "@/types/editor";
 
 import { nodeRegistry } from "./nodes/registry";
 import Sidebar from "./sidebar/sidebar";
@@ -37,7 +38,7 @@ export default function Editor() {
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
-      <ReactFlow
+      <ReactFlow<EditorNode, EditorEdge>
         nodes={nodes}
         edges={edges}
         colorMode={dark ? "dark" : "light"}

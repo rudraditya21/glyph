@@ -1,7 +1,9 @@
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import Image from "next/image";
 
-export default function CatalogNode({ data }: NodeProps) {
+import { EditorNode } from "@/types/editor";
+
+export default function CatalogNode({ data }: NodeProps<EditorNode>) {
   return (
     <div className="flex flex-col items-center">
       <div className="w-28 h-28 rounded-xl border bg-background text-foreground shadow flex flex-col items-center justify-center">
