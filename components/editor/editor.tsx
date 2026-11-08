@@ -7,6 +7,10 @@ const ExcalidrawEditor = dynamic(() => import("./excalidraw-editor"), {
   loading: () => <div className="h-dvh w-full bg-background" />,
 });
 
-export default function Editor() {
-  return <ExcalidrawEditor />;
+interface EditorProps {
+  projectId: string;
+}
+
+export default function Editor({ projectId }: EditorProps) {
+  return <ExcalidrawEditor projectId={projectId} />;
 }
