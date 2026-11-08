@@ -1,20 +1,19 @@
 # Glyph
 
-Glyph is an open-source visual workflow and diagram editor built with Next.js. It provides a flexible canvas-based experience for creating, organizing, and connecting nodes to design workflows, systems, and ideas visually.
+Glyph is an open-source visual workflow and diagram editor built with Next.js and Excalidraw. It provides a flexible canvas for designing workflows, systems, and ideas visually.
 
 The goal of Glyph is to provide a fast, modern, and extensible editor experience with a focus on simplicity, customization, and developer-friendly architecture.
 
 ## Features
 
-- Visual node-based editor
-- Drag and connect workflow canvas
-- Custom node registry system
-- Searchable node catalog
+- Infinite Excalidraw canvas
+- Shapes, arrows, text, freehand drawing, and images
+- AWS, Azure, and GCP icon libraries
 - Theme support (light/dark mode)
 - Undo and redo history
 - Copy, paste, and delete operations
-- Extensible architecture for adding new node types
-- Optimized catalog rendering for large collections
+- Project-specific local persistence
+- Excalidraw export and collaboration-ready document format
 
 ## Getting Started
 

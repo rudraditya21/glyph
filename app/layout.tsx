@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
 import ThemeSync from "@/components/theme-sync";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 const poppins = Poppins({
   variable: "--font-instrument-poppins",
@@ -46,7 +45,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <ThemeSync />
-        <TooltipProvider>{children}</TooltipProvider>
+        {children}
       </body>
     </html>
   );
