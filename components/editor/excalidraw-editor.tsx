@@ -7,6 +7,7 @@ import type { ExcalidrawElement } from "@excalidraw/excalidraw/element/types";
 import type { AppState, BinaryFiles } from "@excalidraw/excalidraw/types";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
+import { loadCloudLibrary } from "@/lib/excalidraw-cloud-library";
 import {
   loadExcalidrawProject,
   saveExcalidrawProject,
@@ -30,7 +31,19 @@ export default function ExcalidrawEditor({
 }: ExcalidrawEditorProps) {
   const dark = useThemeStore((state) => state.dark);
   const initialData = useMemo(
-    () => loadExcalidrawProject(projectId),
+    async () => {
+      const project = loadExcalidrawProject(projectId);
+      const cloudLibrary = await loadCloudLibrary();
+
+      return {
+        ...project,
+        files: {
+          ...cloudLibrary.files,
+          ...project?.files,
+        },
+        libraryItems: cloudLibrary.libraryItems,
+      };
+    },
     [projectId],
   );
   const pendingSceneRef = useRef<PendingScene | null>(null);
